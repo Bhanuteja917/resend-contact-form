@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import GoogleTagManager, { GoogleTagManagerNoScript } from "@/components/GoogleTagManager";
-import CookieYes from "@/components/CookieYes";
+import GoogleTagManager from "@/components/GoogleTagManager";
+import GoogleTagManagerNoScript from "@/components/GoogleTagManagerNoScript";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,23 +25,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || '';
-  const cookieYesId = process.env.NEXT_PUBLIC_COOKIEYES_ID || '';
 
   return (
     <html lang="en">
       <head>
-        {/* CookieYes - Load before GTM for consent management */}
-        <CookieYes cookieYesId={cookieYesId} />
-
-        {/* Google Tag Manager with Consent Mode */}
-        <GoogleTagManager gtmId={gtmId} />
+        <GoogleTagManager gtmId="GTM-KP4NFN3Q" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* GTM noscript fallback */}
-        <GoogleTagManagerNoScript gtmId={gtmId} />
-
+        <GoogleTagManagerNoScript gtmId="GTM-KP4NFN3Q" />
         {children}
       </body>
     </html>
